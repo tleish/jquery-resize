@@ -192,13 +192,15 @@
         var elem = $(this),
           data = $.data( this, str_data );
         
-        // If called from the polling loop, w and h will be passed in as
-        // arguments. If called manually, via .trigger( 'resize' ) or .resize(),
-        // those values will need to be computed.
-        data.w = w !== undefined ? w : elem.width();
-        data.h = h !== undefined ? h : elem.height();
-        
-        old_handler.apply( this, arguments );
+        if(data){
+          // If called from the polling loop, w and h will be passed in as
+          // arguments. If called manually, via .trigger( 'resize' ) or .resize(),
+          // those values will need to be computed.
+          data.w = w !== undefined ? w : elem.width();
+          data.h = h !== undefined ? h : elem.height();
+          
+          old_handler.apply( this, arguments );
+        }
       };
       
       // This may seem a little complicated, but it normalizes the special event
